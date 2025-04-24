@@ -29,8 +29,9 @@ jobs:
       - name: Transfert des pizzas
         id: set-pizzas
         run: |
-          echo "pizzas=${{ github.event.inputs.pizzas }}" >> $GITHUB_OUTPUT
-          
+          pizzas="${{ github.event.inputs.pizzas }}"
+          echo "pizzas=$pizzas" >> $GITHUB_OUTPUT
+
   cuisine:
     needs: reception-commande
     runs-on: ubuntu-latest
