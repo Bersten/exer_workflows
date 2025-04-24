@@ -39,15 +39,19 @@ jobs:
       matrix:
         pizza: ${{ fromJSON(needs.reception-commande.outputs.pizzas) }}
         taille: [L, XL]
-        include:
-          - pizza: dessert
-            taille: L
     steps:
       - name: Préparation pizza
         run: echo "Préparation de la pizza ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
 
+  pizza-dessert:
+    needs: reception-commande
+    runs-on: ubuntu-latest
+    steps:
+      - name: Préparation dessert
+        run: echo "Préparation de la pizza dessert en taille L"
+
   livraison:
-    needs: cuisine
+    needs: [cuisine, pizza-dessert]
     runs-on: ubuntu-latest
     concurrency:
       group: livraison-unique
