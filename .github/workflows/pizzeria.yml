@@ -21,10 +21,12 @@ jobs:
       pizzas: ${{ steps.set-pizzas.outputs.pizzas }}
     steps:
       - name: Message d'accueil
-        run: echo "Bienvenue ${{ github.event.inputs.nom_client }} chez PizzaCI Express !"
+        run: |
+          echo "Bienvenue ${{ github.event.inputs.nom_client }} chez PizzaCI Express !"
 
       - name: Confirmation de commande
-        run: echo "Commandes reçues : ${{ github.event.inputs.pizzas }}"
+        run: |
+          echo "Commandes reçues : ${{ github.event.inputs.pizzas }}"
 
       - name: Transfert des pizzas
         id: set-pizzas
@@ -41,14 +43,16 @@ jobs:
         taille: [L, XL]
     steps:
       - name: Préparation pizza
-        run: echo "Préparation de la pizza ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
+        run: |
+          echo "Préparation de la pizza ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
 
   pizza-dessert:
     needs: reception-commande
     runs-on: ubuntu-latest
     steps:
       - name: Préparation dessert
-        run: echo "Préparation de la pizza dessert en taille L"
+        run: |
+          echo "Préparation de la pizza dessert en taille L"
 
   livraison:
     needs: [cuisine, pizza-dessert]
@@ -58,10 +62,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Préparation livraison
-        run: echo "Livraison en cours pour ${{ github.event.inputs.nom_client }}"
+        run: |
+          echo "Livraison en cours pour ${{ github.event.inputs.nom_client }}"
 
       - name: Liste des pizzas livrées
-        run: echo "Pizzas livrées : ${{ needs.reception-commande.outputs.pizzas }}"
+        run: |
+          echo "Pizzas livrées : ${{ needs.reception-commande.outputs.pizzas }}"
 
   reclamation:
     needs: livraison
