@@ -31,8 +31,9 @@ jobs:
       - name: Transfert des pizzas
         id: set-pizzas
         run: |
-          # On nettoie les guillemets ou autres caractères indésirables
           pizzas="${{ github.event.inputs.pizzas }}"
+          # Retirer les guillemets supplémentaires si présents
+          pizzas=$(echo $pizzas | sed 's/^"\(.*\)"$/\1/')
           echo "pizzas=$pizzas" >> $GITHUB_OUTPUT
           echo "Pizzas transférées : $pizzas"
 
