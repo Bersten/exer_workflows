@@ -31,6 +31,7 @@ jobs:
       - name: Transfert des pizzas
         id: set-pizzas
         run: |
+          # On nettoie les guillemets ou autres caractères indésirables
           pizzas="${{ github.event.inputs.pizzas }}"
           echo "pizzas=$pizzas" >> $GITHUB_OUTPUT
           echo "Pizzas transférées : $pizzas"
@@ -40,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pizza: ${{ fromJSON(needs.reception-commande.outputs.pizzas) }}
+        pizza: ${{ fromJson(needs.reception-commande.outputs.pizzas) }}
         taille: [L, XL]
     steps:
       - name: Préparation pizza
