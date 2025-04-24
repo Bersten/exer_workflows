@@ -33,6 +33,7 @@ jobs:
         run: |
           pizzas="${{ github.event.inputs.pizzas }}"
           echo "pizzas=$pizzas" >> $GITHUB_OUTPUT
+          echo "Pizzas transférées : $pizzas"
 
   cuisine:
     needs: reception-commande
@@ -44,8 +45,8 @@ jobs:
     steps:
       - name: Préparation pizza
         run: |
-          echo "Pizzas reçues : ${{ needs.reception-commande.outputs.pizzas }}"
-          echo "Pizza à préparer : ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
+          echo "Pizzas à préparer : ${{ matrix.pizza }}"
+          echo "Taille : ${{ matrix.taille }}"
 
   pizza-dessert:
     needs: reception-commande
