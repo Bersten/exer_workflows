@@ -44,7 +44,8 @@ jobs:
     steps:
       - name: Préparation pizza
         run: |
-          echo "Préparation de la pizza ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
+          echo "Pizzas reçues : ${{ needs.reception-commande.outputs.pizzas }}"
+          echo "Pizza à préparer : ${{ matrix.pizza }} en taille ${{ matrix.taille }}"
 
   pizza-dessert:
     needs: reception-commande
