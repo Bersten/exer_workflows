@@ -30,7 +30,7 @@ jobs:
         id: set-pizzas
         run: |
           echo "pizzas=${{ github.event.inputs.pizzas }}" >> $GITHUB_OUTPUT
-
+          
   cuisine:
     needs: reception-commande
     runs-on: ubuntu-latest
